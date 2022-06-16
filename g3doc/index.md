@@ -1,7 +1,5 @@
 # Metalang
 
-go/metalang  <!-- copybara:strip(internal link) -->
-
 [TOC]
 
 ## Motivation
