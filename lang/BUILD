@@ -1,23 +1,24 @@
 # Meta-language for lazy evaluation of Flax modules.
 
-load("//devtools/python/blaze:strict.bzl", "py_strict_test")
-load("//devtools/python/blaze:pytype.bzl", "pytype_strict_library")
+load("@rules_python//python:defs.bzl", "py_test")
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
 
 licenses(["notice"])
 
-pytype_strict_library(
+py_library(
     name = "functions",
     srcs = ["functions.py"],
-    visibility = ["//third_party/py/metalang:__subpackages__"],
+    visibility = [requirement("metalang:__subpackages__")],
     deps = [
         ":expr",
     ],
 )
 
-pytype_strict_library(
+py_library(
     name = "lang",
     srcs = ["__init__.py"],
-    visibility = ["//third_party/py/metalang:__subpackages__"],
+    visibility = [requirement("metalang:__subpackages__")],
     deps = [
         ":consts",
         ":expr",
@@ -25,31 +26,31 @@ pytype_strict_library(
     ],
 )
 
-pytype_strict_library(
+py_library(
     name = "expr",
     srcs = ["expr.py"],
-    visibility = ["//third_party/py/metalang:__subpackages__"],
+    visibility = [requirement("metalang:__subpackages__")],
     deps = [
-        "//third_party/py/chex",
-        "//third_party/py/immutabledict",
-        "//third_party/py/jax",
+        requirement("chex"),
+        requirement("immutabledict"),
+        requirement("jax"),
     ],
 )
 
-pytype_strict_library(
+py_library(
     name = "consts",
     srcs = ["consts.py"],
-    visibility = ["//third_party/py/metalang:__subpackages__"],
+    visibility = [requirement("metalang:__subpackages__")],
     deps = [":expr"],
 )
 
-py_strict_test(
+py_library(
     name = "lang_test",
     srcs = ["lang_test.py"],
     deps = [
         ":lang",
         "//testing/pybase",
-        "//third_party/py/jax",
-        "//third_party/py/numpy",
+        requirement("jax"),
+        requirement("numpy"),
     ],
 )
