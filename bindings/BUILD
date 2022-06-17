@@ -15,7 +15,7 @@ py_library(
     srcs = ["flax.py"],
     deps = [
         ":types",
-        "//third_party/py/flax:core",
+        requirement("flax:core"),
         requirement("jax"),
         "//lang",
     ],
