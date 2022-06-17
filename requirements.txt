@@ -1,0 +1,8 @@
+absl-py
+chex
+flax
+immutabledict
+jax
+jaxlib
+numpy
+optax

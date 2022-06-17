@@ -11,22 +11,22 @@ py_library(
 )
 
 py_library(
-    name = "flax",
-    srcs = ["flax.py"],
+    name = "metaflax",
+    srcs = ["metaflax.py"],
     deps = [
         ":types",
-        requirement("flax:core"),
+        requirement("flax"),
         requirement("jax"),
         "//lang",
     ],
 )
 
-py_library(
-    name = "flax_test",
-    srcs = ["flax_test.py"],
+py_test(
+    name = "metaflax_test",
+    srcs = ["metaflax_test.py"],
     deps = [
-        ":flax",
-        "//testing/pybase",
+        ":metaflax",
+        requirement("absl-py"),
         requirement("flax"),
         requirement("jax"),
         "//lang",

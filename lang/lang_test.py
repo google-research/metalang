@@ -13,12 +13,11 @@
 # limitations under the License.
 
 """Tests for metalang."""
+from absl.testing import absltest
 import jax
 import jax.numpy as jp
-import numpy as np
-
 from metalang import lang
-from google3.testing.pybase import googletest
+import numpy as np
 
 
 def l2(output: lang.Expr, target: lang.Expr) -> lang.Expr:
@@ -32,7 +31,7 @@ def l2(output: lang.Expr, target: lang.Expr) -> lang.Expr:
       spec=lang.PrototypeExprSpec(1.0))
 
 
-class LangTest(googletest.TestCase):
+class LangTest(absltest.TestCase):
 
   def test_fn_lift_jittable(self):
     a = lang.var(jp.array([1, 2, 3]), "a")
@@ -306,4 +305,4 @@ class LangTest(googletest.TestCase):
     self.assertEqual(a(x=1, y=4).eval(), 5)
 
 if __name__ == "__main__":
-  googletest.main()
+  absltest.main()

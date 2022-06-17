@@ -1,18 +1,22 @@
 # Meta-language for lazy evaluation of Flax modules.
 
-load("//devtools/python/blaze:pytype.bzl", "pytype_strict_library")
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
 
 licenses(["notice"])
 
-exports_files(["LICENSE"])
+exports_files([
+    "LICENSE",
+    "requirements.txt",
+])
 
-pytype_strict_library(
+py_library(
     name = "metalang",
     srcs = ["__init__.py"],
     visibility = ["//visibility:public"],
     deps = [
-        "//third_party/py/metalang/lang:consts",
-        "//third_party/py/metalang/lang:expr",
-        "//third_party/py/metalang/lang:functions",
+        "//lang:consts",
+        "//lang:expr",
+        "//lang:functions",
     ],
 )

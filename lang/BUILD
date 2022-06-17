@@ -44,12 +44,12 @@ py_library(
     deps = [":expr"],
 )
 
-py_library(
+py_test(
     name = "lang_test",
     srcs = ["lang_test.py"],
     deps = [
         ":lang",
-        "//testing/pybase",
+        requirement("absl-py"),
         requirement("jax"),
         requirement("numpy"),
     ],

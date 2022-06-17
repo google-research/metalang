@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Flax support for metalang.
 
 This is mostly convenience sugar for use with flax.
@@ -26,7 +25,6 @@ from jax.tree_util import register_pytree_node_class
 
 from metalang.bindings import types
 from metalang import lang
-
 
 # TODO(namiller): Support dict datasets.
 
@@ -90,6 +88,7 @@ def init_fn(module: lang.Expr[flax.linen.Module],
     name: The name of the resultant Expr (by default module.name + '_params'.
     init: True if the returned Expr should initialize with the module.init fn.
       Otherwise it will evaluate to the module.init fn.
+
   Returns:
     A constructor for the module's params which produces exprs either evaluating
     to the modules params, or initializing to it per init argument when called
@@ -97,11 +96,13 @@ def init_fn(module: lang.Expr[flax.linen.Module],
   """
   if not name:
     name = module.name + "_params"
+
   def fn(*args: lang.Expr, **kwargs: lang.Expr) -> lang.Expr[types.Params]:
     init_expr = module.obj.init(*args, **kwargs)
     if init:
       return lang.Expr.make_unbound(name=name, init=init_expr)
     return init_expr
+
   return fn
 
 
@@ -146,8 +147,9 @@ class ModuleExpr:
 
   def init(self, *args: lang.Expr,
            **kwargs: lang.Expr) -> lang.Expr[types.Params]:
-    return init_fn(self.expr, init=self.variable_params)(
-        *args, **kwargs, method=self.method)
+    return init_fn(
+        self.expr, init=self.variable_params)(
+            *args, **kwargs, method=self.method)
 
   def apply(self, params: lang.Expr[types.Params], *args: lang.Expr,
             **kwargs: lang.Expr) -> lang.Expr:
