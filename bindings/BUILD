@@ -1,6 +1,6 @@
 # Bindings for improved ease of use with other python libraries.
-load("@rules_python//python:defs.bzl", "py_test")
 load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_test")
 load("@rules_python//python:defs.bzl", "py_library")
 
 licenses(["notice"])
@@ -15,7 +15,7 @@ py_library(
     srcs = ["flax.py"],
     deps = [
         ":types",
-        requirement("flax:core"),
+        "//third_party/py/flax:core",
         requirement("jax"),
         "//lang",
     ],

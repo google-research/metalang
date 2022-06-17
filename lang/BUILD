@@ -1,7 +1,7 @@
 # Meta-language for lazy evaluation of Flax modules.
 
-load("@rules_python//python:defs.bzl", "py_test")
 load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_test")
 load("@rules_python//python:defs.bzl", "py_library")
 
 licenses(["notice"])
@@ -9,7 +9,7 @@ licenses(["notice"])
 py_library(
     name = "functions",
     srcs = ["functions.py"],
-    visibility = [requirement("metalang:__subpackages__")],
+    visibility = ["//third_party/py/metalang:__subpackages__"],
     deps = [
         ":expr",
     ],
@@ -18,7 +18,7 @@ py_library(
 py_library(
     name = "lang",
     srcs = ["__init__.py"],
-    visibility = [requirement("metalang:__subpackages__")],
+    visibility = ["//third_party/py/metalang:__subpackages__"],
     deps = [
         ":consts",
         ":expr",
@@ -29,7 +29,7 @@ py_library(
 py_library(
     name = "expr",
     srcs = ["expr.py"],
-    visibility = [requirement("metalang:__subpackages__")],
+    visibility = ["//third_party/py/metalang:__subpackages__"],
     deps = [
         requirement("chex"),
         requirement("immutabledict"),
@@ -40,7 +40,7 @@ py_library(
 py_library(
     name = "consts",
     srcs = ["consts.py"],
-    visibility = [requirement("metalang:__subpackages__")],
+    visibility = ["//third_party/py/metalang:__subpackages__"],
     deps = [":expr"],
 )
 
