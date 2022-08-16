@@ -396,7 +396,7 @@ class Expr(Generic[T]):
     """
     # BFS from root. Find all expressions that are evaluable, evaluate them and
     # replace.
-    # TODO(namiller): We probably could do a partial restart after a swap rather
+    # TODO: We probably could do a partial restart after a swap rather
     # than a full reset.
     root = self
     q = collections.deque([root])
@@ -413,8 +413,8 @@ class Expr(Generic[T]):
       # Otherwise try all children nodes (including init).
       else:
         q.extendleft(n.children)
-        # TODO(namiller): Figure out why pytype thinks Expr doesn't have init??
-        # TODO(namiller): File a bug with pytype and add bug link here.
+        # TODO: Figure out why pytype thinks Expr doesn't have init??
+        # TODO: File a bug with pytype and add bug link here.
         init = n.init  # pytype: disable=attribute-error
         if isinstance(init, Expr):
           q.appendleft(init)
@@ -583,7 +583,7 @@ class Expr(Generic[T]):
                    ]).union(set([v.name for v in kwits.values()]))
     exprs = set()
 
-    # TODO(namiller): Replace MutableAst with a single array indexed by uuid.
+    # TODO: Replace MutableAst with a single array indexed by uuid.
 
     root = _MutableAst(self, uuid=0)
     q = collections.deque([root])
@@ -632,7 +632,7 @@ class Expr(Generic[T]):
       outer_values = dict(zip(expr_args, expr_values))
 
       def fn(*arg_values, **kwarg_values):
-        # TODO(namiller): Check behavior of over-written outer_values.
+        # TODO: Check behavior of over-written outer_values.
         ast_values = outer_values.copy()
         ast_values.update(dict(zip(args + tuple(kwargs.values()), arg_values)))
         ast_values.update({kwargs[k]: v for k, v in kwarg_values.items()})
@@ -653,7 +653,7 @@ class Expr(Generic[T]):
     arg_dict = self.arg_dict()
     return {arg_dict[name]: value for name, value in kwargs.items()}
 
-  # TODO(namiller): Add support for extracting remapped named.
+  # TODO: Add support for extracting remapped named.
   def partial(self, env: Optional[Env] = None, **kwargs: Any) -> 'Expr[T]':
     """Partially evaluate the AST with the provided env.
 

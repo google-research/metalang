@@ -26,7 +26,7 @@ from jax.tree_util import register_pytree_node_class
 from metalang.bindings import types
 from metalang import lang
 
-# TODO(namiller): Support dict datasets.
+# TODO: Support dict datasets.
 
 # Chosen by fair dice roll.
 _RNG_DEFAULT_SEED = 726883474
@@ -112,7 +112,7 @@ def apply_fn(module: lang.Expr[flax.linen.Module]):
   def fn(params: lang.Expr[types.Params], *args: lang.Expr,
          **kwargs: lang.Expr) -> lang.Expr:
     # We swap out the spec here to support unpacking (assumes this is "mutable")
-    # TODO(namiller): Figure out a better way to support unpacking and obviate.
+    # TODO: Figure out a better way to support unpacking and obviate.
     return dc.replace(
         module.obj.apply(params, *args, **kwargs),
         spec=lang.TensorExprSpec((2,)))
